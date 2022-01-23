@@ -1,0 +1,23 @@
+function dinamica() {
+  let PlanDados=SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Tratamento");
+  let Linha= PlanDados.getLastRow();
+  let C1="A1:";
+  let C2 ="H"+Linha;
+  let DadosTabela = "Tratamento!" + C1 + C2;
+  limpar();
+ 
+  var spreadsheet = SpreadsheetApp.getActive().getSheetByName("Agrupar");
+  //Tabela Dinamica
+  var Area = spreadsheet.getRange(DadosTabela);
+  var pivotTable = spreadsheet.getRange('A1').createPivotTable(Area);
+   
+  pivotGroup = pivotTable.addRowGroup(7);
+  pivotGroup.showTotals(false);
+  pivotGroup = pivotTable.addRowGroup(8);
+  pivotGroup.showTotals(false)
+  .showRepeatedLabels();
+  pivotGroup = pivotTable.addRowGroup(6);
+  pivotGroup.showTotals(false);
+  var pivotValue = pivotTable.addPivotValue(6, SpreadsheetApp.PivotTableSummarizeFunction.COUNTA);
+  SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Agrupar").getRange("A2").activate;
+}

@@ -1,0 +1,17 @@
+function limparHoras() //limpa a planilha horas trabalhadas
+{
+var resposta = Browser.msgBox('ALERTA', 'Deseja realmente prosseguir? Células vinculadas ao processamento!', Browser.Buttons.YES_NO) ;
+if (resposta == "yes"){
+
+  var planilha=SpreadsheetApp.getActiveSpreadsheet().getSheetByName("HoraTrabAjuste");
+  ultimaLinha=planilha.getLastRow();
+  var dados = planilha.getRange(2,1,ultimaLinha,3).getValues();
+  planilha.getRange(2,1,ultimaLinha,3).clear();
+  planilha.getRange(2,1).activate();
+  //Browser.msgBox(dados); 
+}else{
+  Browser.msgBox("Procedimento Abortado")
+}
+
+};
+
